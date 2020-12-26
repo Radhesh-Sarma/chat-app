@@ -12,21 +12,26 @@ import ForgotPassword from './components/ForgotPassword';
 import Home from './components/Home';
 import Navbar from './components/NavigationBar';
 import NotFound from './components/NotFound';
+import { AuthProvider } from "./contexts/AuthContext"
+import PrivateRoute from "./components/PrivateRoute"
+
 function App() {
   return (
     <div className="App">
-       <Navbar/>
       <Router>
+      <AuthProvider>
+      <Navbar/>
         <Switch>
           <Route exact path = '/' component = {Home}/>
           <Route path = '/home' component = {Home}/>
-          <Route path = '/dashboard' component = {Dashboard}/>
+          <PrivateRoute path = '/dashboard' component = {Dashboard}/>
           <Route path = '/login' component = {Login}/>
-          <Route path = '/updateProfile' component = {UpdateProfile}/>
+          <PrivateRoute path = '/updateProfile' component = {UpdateProfile}/>
           <Route path = '/signup' component = {Signup}/>
           <Route path = '/forgotPassword' component = {ForgotPassword}/>
           <Route component = {NotFound}/>
         </Switch>
+        </AuthProvider>    
       </Router>
     </div>
   );

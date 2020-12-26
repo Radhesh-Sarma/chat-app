@@ -1,21 +1,41 @@
 
 import React, { useRef, useState } from "react";
-import {Container,Form,Button, Jumbotron} from 'react-bootstrap'
-import { Link} from "react-router-dom"
+import {Container,Form,Button, Jumbotron,Alert} from 'react-bootstrap'
+import { Link, useHistory } from "react-router-dom"
 import { GoogleLoginButton} from "react-social-login-buttons";
+import { useAuth } from "../contexts/AuthContext"
 
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
+    const { login } = useAuth()
+    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    const history = useHistory()
+
+    async function handleSubmit(e) {
+        e.preventDefault()
     
+        try {
+          setError("")
+          setLoading(true)
+          await login(emailRef.current.value, passwordRef.current.value)
+          history.push("/")
+        } catch {
+          setError("Failed to log in")
+        }
+    
+        setLoading(false)
+      }
+
     return (
         <div>
             {/* Login form using react bootstrap https://react-bootstrap.netlify.app/components/forms/ */}
             <Container>
                 <Jumbotron className = "mt-5"> 
                     <h1 className = "mb-4">Login</h1>
-                    <Form>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleSubmit}>
 
                         <Form.Group className = "text-left" controlId="formBasicEmail">
                             <Form.Label><h3>Email Address</h3></Form.Label>
