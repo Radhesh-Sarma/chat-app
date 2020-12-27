@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/AuthContext"
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login,currentUser} = useAuth()
+    const { login,currentUser,loginWithGoogle} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -31,6 +31,20 @@ export default function Login() {
     
         setLoading(false)
       }
+
+      async function handleGoogleLogin(e) {
+        try {
+          setError("");
+          setLoading(true);
+          await loginWithGoogle();
+          history.push("/dashboard");
+        } catch (err) {
+          setError("Failed to log in");
+        }
+    
+        setLoading(false);
+      }
+
 
     return (
         <div>
@@ -56,7 +70,9 @@ export default function Login() {
                         </Button>
 
                     </Form>
-                    <GoogleLoginButton>
+                    <GoogleLoginButton disabled={loading}
+            type="Submit"
+            onClick={handleGoogleLogin}>
                      Student Login with Google
                     </GoogleLoginButton>
                     <div className = "w-100 mt-4">
