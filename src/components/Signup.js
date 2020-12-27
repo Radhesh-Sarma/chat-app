@@ -1,17 +1,20 @@
 import React, { useRef, useState } from "react";
 import {Container,Form,Button, Jumbotron,Alert} from 'react-bootstrap'
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory,Redirect } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
     const nameRef = useRef()
-    const { signup } = useAuth()
+    const { signup,updateName ,currentUser} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
-   
+    if(currentUser)
+    {
+        return <Redirect to="/dashboard" />;
+    }
     async function handleSubmit(e) {
         e.preventDefault()
     
@@ -22,7 +25,8 @@ export default function Signup() {
         try {
           setError("")
           setLoading(true)
-          await signup(nameRef.current.value,emailRef.current.value, passwordRef.current.value)
+          await signup(emailRef.current.value, passwordRef.current.value)
+          await updateName(nameRef.current.value)
           history.push("/")
         } catch(e) {
             console.log(e)

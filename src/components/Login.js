@@ -1,18 +1,22 @@
 
 import React, { useRef, useState } from "react";
 import {Container,Form,Button, Jumbotron,Alert} from 'react-bootstrap'
-import { Link, useHistory } from "react-router-dom"
+import {Link ,Redirect, useHistory} from 'react-router-dom';
 import { GoogleLoginButton} from "react-social-login-buttons";
 import { useAuth } from "../contexts/AuthContext"
 
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login } = useAuth()
+    const { login,currentUser} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
+    if(currentUser)
+    {
+        return <Redirect to="/dashboard" />;
+    }
     async function handleSubmit(e) {
         e.preventDefault()
     
@@ -20,7 +24,7 @@ export default function Login() {
           setError("")
           setLoading(true)
           await login(emailRef.current.value, passwordRef.current.value)
-          history.push("/")
+          history.push("/dashboard")
         } catch {
           setError("Failed to log in")
         }
