@@ -70,19 +70,24 @@ export default function Login() {
                         </Button>
 
                     </Form>
-                    <GoogleLoginButton disabled={loading}
+                    <div className = "mt-3">
+                    <GoogleLoginButton disabled={loading} className = "mt-2" style = {{ display:" block", width: 'auto',margin: 'auto'}} 
             type="Submit"
             onClick={handleGoogleLogin}>
                      Student Login with Google
                     </GoogleLoginButton>
-                    <div className = "w-100 mt-4">
-                       <h3>Want an account ? <Link to="/signup">Sign Up</Link></h3> 
                     </div>
                     <div className = "w-100 mt-4">
-                       <h3>Forgot Password ? <Link to="/forgotPassword">Click Here</Link></h3> 
+                       <h3>Want an account ? <Link to="/signup">Sign Up</Link> </h3> 
+                    </div>
+                    <div className = "w-100 mt-4">
+                       <h3> Forgot Password ? <Link to="/forgotPassword">Click Here</Link> </h3> 
                     </div>
                 </Jumbotron>
-            </Container>             
+            </Container>  
+                       
         </div>
+
     )
-}
+  }
+

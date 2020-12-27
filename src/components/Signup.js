@@ -67,10 +67,10 @@ export default function Signup() {
                         </Form.Group>
 
                         <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check name = "radiogroup" id = "one" type="radio" label="Student" />
-                            <Form.Check name = "radiogroup" id = "two" type="radio" label="Tutor" />
+                            <Form.Check name = "radiogroup" size = "lg" id = "one" type="radio" label="Student" />
+                            <Form.Check name = "radiogroup" size = "lg" id = "two" type="radio" label="Tutor" />
                         </Form.Group>
-                        <Button className = "mt-4" size = "lg" variant="primary" loading = {loading} type="submit">
+                        <Button className = "mt-4" size = "md" variant="primary" loading = {loading} type="submit">
                             Sign Up with Email
                         </Button>
                     </Form>
