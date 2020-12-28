@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext"
 import {Redirect} from 'react-router-dom';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
-import {Row,Col} from 'react-bootstrap'
+import {Row,Col,Jumbotron, Container} from 'react-bootstrap'
 export default function Dashboard() {
     const { currentUser } = useAuth()
     if(!currentUser)
@@ -12,6 +12,11 @@ export default function Dashboard() {
     }
     return (
         <div>
+
+
+            <Container>
+
+      
             <h1>
             Dashboard
             </h1>
@@ -24,6 +29,7 @@ export default function Dashboard() {
            <ChatWindow/>
            </Col>
             </Row>
+            </Container>
         </div>
     )
 }

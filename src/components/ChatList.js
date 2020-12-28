@@ -9,7 +9,7 @@ export default function ChatList() {
 
        
         <div>
-<div className = "d-flex justify-content-start text-left"style={{
+<div style={{
   height: "500px",
   width: "500px"
 }}>
