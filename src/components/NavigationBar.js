@@ -1,7 +1,7 @@
 import React from 'react'
 import {Navbar,Form,Button,Nav} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
-import {Link ,Redirect, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 export default function NavigationBar() {
     const { currentUser ,logout} = useAuth()
     const history = useHistory()

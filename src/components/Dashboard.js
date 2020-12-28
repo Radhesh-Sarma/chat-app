@@ -1,9 +1,9 @@
 import React from 'react'
 import { useAuth } from "../contexts/AuthContext"
-import {Link ,Redirect, useHistory} from 'react-router-dom';
-import {Button} from 'react-bootstrap'
+import {Redirect} from 'react-router-dom';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
+import {Row,Col} from 'react-bootstrap'
 export default function Dashboard() {
     const { currentUser } = useAuth()
     if(!currentUser)
@@ -15,8 +15,15 @@ export default function Dashboard() {
             <h1>
             Dashboard
             </h1>
+            <Row>
+
+            <Col>
             <ChatList/>
-            <ChatWindow/>
+            </Col>
+           <Col>
+           <ChatWindow/>
+           </Col>
+            </Row>
         </div>
     )
 }
